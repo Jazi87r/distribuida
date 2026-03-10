@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0d47a1, #42a5f5);
+}
+
+.login-box {
+  display: flex;
+  flex-direction: column;
+}
+
+#logo {
+  align-self: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 15px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  color: white;
+}
+
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.input-box {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  background: transparent;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  color: #ccc;
+}
+
+.input-box input:focus {
+  border-bottom: 2px solid whitesmoke;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+  top: -20px;
+  color: whitesmoke;
+  font-size: 12px;
+}
+
+.btn {
+  width: 100%;
+  background: #fff;
+  color: #0d47a1;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background: whitesmoke;
+  transform: scale(1.03);
+}
+
+.signup-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.signup-text a {
+  color: #bbdefb;
+  text-decoration: underline;
+}
+

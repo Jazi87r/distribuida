@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import authroutes from "./routes/authroutes.js";
+import supabase from './config/supabase.js';
 
 const app = express();
 
@@ -10,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, "frontend" , "public" )));
+app.use(express.static(path.join(__dirname, "../../frontend/public")));
 
 // Set EJS as the view engine
 app.set("view engine", "ejs");
@@ -21,6 +22,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // --- Routes ---
 app.use("/", authroutes);
+app.get('/test-db', async (req, res) => {
+  const { data, error } = await supabase.from('your_table_name').select('*').limit(1);
+  
+  if (error) return res.status(500).json({ error: error.message });
+  res.json({ success: true, data });
+});
 
 
 
