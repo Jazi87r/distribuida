@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Global styles -->
+    <link rel="stylesheet" href="/css/partials.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Page specific styles -->
+    <% if (typeof pageCSS !== 'undefined') { %>
+        <link rel="stylesheet" href="/css/<%= pageCSS %>">
+    <% } %>
+
+    <title>Document</title>
+</head>
+
+<header class="app-header">
+
+    <button class="menu-toggle" aria-label="Toggle Menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </button>
+    
+    <div class="header-logo">
+        <p style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+            secretaria de transito
+        </p>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="main-navbar">
+        <form action="/vehiculos" method="get">
+            <button type="submit">Vehiculos</button>
+        </form>
+
+        <form action="/propietarios" method="get">
+            <button type="submit">Propietarios</button>
+        </form>
+
+        <form action="/infracciones" method="get">
+            <button type="submit">Infracciones</button>
+        </form>
+    </nav>
+
+    <button class="profile-button" aria-label="Profile Settings">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4zm0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4z"/>
+        </svg>
+    </button>
+
+</header>
