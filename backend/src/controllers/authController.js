@@ -9,7 +9,7 @@ export const handleLogin = (req, res) => {
 
   // Replace with real authentication logic later
   if (username === "admin" && password === "1234") {
-    res.render("homepage.ejs");
+    res.render("homepage.ejs", { pageCSS: "homepage.css" });
   } else {
     res.render("auth.ejs", { error: "Invalid credentials" });
   }

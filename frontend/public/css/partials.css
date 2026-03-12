@@ -1,0 +1,243 @@
+/* ========================================= */
+/* HEADER STYLES                 */
+/* ========================================= */
+
+/* --- Header Layout --- */
+.app-header {
+    /* The red background from your example */
+    background-color: #42a5f5; /* A bright red */
+    color: white; /* Text and icon color */
+    height: 60px; /* Standard header height */
+    padding: 0 15px;
+    
+    /* Flexbox for layout: center items vertically, space out horizontally */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    /* Make sure the header stays at the top */
+    position: sticky; 
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+/* --- Menu Toggle Button (Three Bars) --- */
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 30px;
+    width: 30px;
+}
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+/* --- Logo Section --- */
+.header-logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem; /* Large font for the name */
+    font-weight: bold;
+}
+
+.logo-img {
+    /* Style for the logo image you will insert */
+    height: 30px; /* Adjust as needed */
+    margin-right: 8px;
+    /* Optional: filter to make the image white if it's a black icon */
+    filter: brightness(0) invert(1); 
+}
+
+/* The 'FoodLink' text */
+.logo-text {
+    /* Style to match the blurred/stylized text in your example */
+    letter-spacing: 1px;
+}
+
+/* --- Profile Button (Right Icon) --- */
+.profile-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+}
+
+.profile-button svg {
+    /* Makes the SVG icon fill the button space */
+    width: 100%;
+    height: 100%;
+}
+
+.menu-toggle:hover,
+.profile-button:hover {
+    opacity: 0.8; /* Subtle hover effect */
+}
+
+/* ========================================= */
+/* FOOTER STYLES                */
+/* ========================================= */
+
+.app-footer {
+    /* Dark background for contrast with the red header/white content */
+    background-color: #222;
+    color: #ccc;
+    padding: 30px 20px 0;
+    font-size: 0.9rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px; /* Aligns with typical content width */
+    margin: 0 auto;
+    flex-wrap: wrap; /* Allows sections to wrap on small screens */
+    padding-bottom: 20px;
+}
+
+.footer-section {
+    flex: 1; /* Each section takes equal width initially */
+    min-width: 200px; /* Minimum width before wrapping */
+    margin-bottom: 20px;
+}
+
+/* Headings */
+.footer-section h4 {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #42a5f5; /* Use the header's red color for consistency */
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Link Lists */
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #42a5f5; /* Hover uses the brand color */
+}
+
+/* Social Icons (using placeholders here) */
+.social-icons a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: #444;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+.social-icons a:hover {
+    background-color: #ccc
+    ;
+}
+
+/* Logo in Footer */
+.footer-logo {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 20px;
+    letter-spacing: 1px;
+}
+
+/* Copyright Bar */
+.footer-bottom {
+    text-align: center;
+    padding: 15px 0;
+    border-top: 1px solid #333; /* Separator line */
+    color: #aaa;
+}
+
+/* --- Responsiveness for Small Screens --- */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Stack columns vertically */
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-section {
+        min-width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .footer-section ul {
+        /* Center lists when stacked */
+        display: inline-block;
+    }
+}
+
+/* ========================================= */
+/* NAVBAR STYLES                */
+/* ========================================= */
+
+.main-navbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Remove default form spacing */
+.main-navbar form {
+    margin: 0;
+}
+
+/* Navbar buttons */
+.main-navbar button {
+    background-color: white;
+    color: #42a5f5;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Hover effect */
+.main-navbar button:hover {
+    background-color: #e3f2fd;
+}
+
+/* Make navbar responsive */
+@media (max-width: 768px) {
+    .main-navbar {
+        gap: 6px;
+    }
+
+    .main-navbar button {
+        padding: 5px 10px;
+        font-size: 0.9rem;
+    }
+}

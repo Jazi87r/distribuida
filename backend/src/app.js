@@ -2,6 +2,9 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import authroutes from "./routes/authroutes.js";
+import vehiculosRoutes from "./routes/vehiculosRoutes.js";
+import propietariosRoutes from "./routes/propietariosRoutes.js";
+//import infraccionesRoutes from "./routes/infraccionesRoutes.js";
 import supabase from './config/supabase.js';
 
 const app = express();
@@ -22,11 +25,16 @@ app.use(express.urlencoded({ extended: true }));
 
 // --- Routes ---
 app.use("/", authroutes);
+app.use("/vehiculos", vehiculosRoutes);
+app.use("/propietarios", propietariosRoutes);
+//app.use("/infracciones", infraccionesRoutes);
+
 app.get('/test-db', async (req, res) => {
-  const { data, error } = await supabase.from('your_table_name').select('*').limit(1);
+  const { data, error } = await supabase.from('users').select('*').limit(3);
   
   if (error) return res.status(500).json({ error: error.message });
   res.json({ success: true, data });
+  console.log("DB Test Result:", data);
 });
 
 

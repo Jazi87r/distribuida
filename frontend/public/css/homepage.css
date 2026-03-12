@@ -1,0 +1,137 @@
+/* GENERAL PAGE */
+
+body{
+font-family: Arial, Helvetica, sans-serif;
+background-color:#f5f5f5;
+margin:40px;
+}
+
+h1{
+margin-bottom:20px;
+}
+
+/* CREATE VEHICLE FORM */
+
+.create-container{
+background:white;
+padding:20px;
+border-radius:6px;
+margin-bottom:30px;
+width:400px;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.create-form{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.create-form input{
+padding:8px;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+.create-form button{
+padding:10px;
+background:#2ecc71;
+color:white;
+border:none;
+border-radius:4px;
+cursor:pointer;
+}
+
+.create-form button:hover{
+background:#27ae60;
+}
+
+/* TABLE */
+
+.vehiculos-table{
+width:100%;
+border-collapse:collapse;
+background:white;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.vehiculos-table th{
+background:#333;
+color:white;
+padding:12px;
+text-align:left;
+}
+
+.vehiculos-table td{
+padding:12px;
+border-bottom:1px solid #ddd;
+}
+
+.vehiculos-table tr:hover{
+background:#f2f2f2;
+}
+
+/* ACTION COLUMN */
+
+.actions{
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+/* BUTTONS */
+
+button{
+padding:6px 12px;
+border:none;
+border-radius:4px;
+cursor:pointer;
+}
+
+.update-btn{
+background:#3498db;
+color:white;
+}
+
+.update-btn:hover{
+background:#2980b9;
+}
+
+.delete-btn{
+background:#e74c3c;
+color:white;
+}
+
+.delete-btn:hover{
+background:#c0392b;
+}
+
+/* UPDATE FORM */
+
+.update-form{
+display:flex;
+flex-direction:column;
+gap:6px;
+margin-top:10px;
+}
+
+.update-form input{
+padding:6px;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+.update-form button{
+background:#95a5a6;
+color:white;
+}
+
+.update-form button:hover{
+background:#7f8c8d;
+}
+
+/* IMPORTANT: HIDDEN CLASS */
+
+.hidden{
+display:none;
+}
