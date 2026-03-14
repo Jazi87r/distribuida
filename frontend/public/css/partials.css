@@ -225,6 +225,13 @@
     transition: background-color 0.2s, color 0.2s;
 }
 
+/*generar informe button styles*/
+.main-navbar #generar-informe-btn {
+    background-color: #42a5f5;
+    color: white;
+    border: 2px solid white;
+}
+
 /* Hover effect */
 .main-navbar button:hover {
     background-color: #e3f2fd;

@@ -43,31 +43,34 @@
 
 <!-- Example row (replace with template loop) -->
 
+<% vehiculos.forEach(vehiculo => { %>
+
+
 <tr>
 
-<td>1</td>
-<td>ABC123</td>
-<td>Toyota</td>
-<td>12345</td>
-<td>2023-01-01</td>
-<td>Carro</td>
-<td>2</td>
+<td><%= vehiculo.id %></td>
+<td><%= vehiculo.placa %></td>
+<td><%= vehiculo.marca %></td>
+<td><%= vehiculo.matricula %></td>
+<td><%= vehiculo.fecha_matricula %></td>
+<td><%= vehiculo.tipo %></td>
+<td><%= vehiculo.propietario_id %></td>
 
 <td class="actions">
 
 <!-- UPDATE -->
-<form action="/vehiculos/update/1" method="POST" class="inline-form">
+<form action="/vehiculos/update/<%= vehiculo.id %>" method="POST" class="inline-form">
 
 <button type="button" class="update-btn">Update</button>
 
 <div class="update-form hidden">
 
-<input type="text" name="placa" value="ABC123" required>
-<input type="text" name="marca" value="Toyota" required>
-<input type="number" name="matricula" value="12345" required>
-<input type="date" name="fecha_matricula" value="2023-01-01" required>
-<input type="text" name="tipo" value="Carro" required>
-<input type="number" name="propietario_id" value="2" required>
+<input type="text" name="placa" value="<%= vehiculo.placa %>" required>
+<input type="text" name="marca" value="<%= vehiculo.marca %>" required>
+<input type="number" name="matricula" value="<%= vehiculo.matricula %>" required>
+<input type="date" name="fecha_matricula" value="<%= vehiculo.fecha_matricula %>" required>
+<input type="text" name="tipo" value="<%= vehiculo.tipo %>" required>
+<input type="number" name="propietario_id" value="<%= vehiculo.propietario_id %>" required>
 
 <button type="submit">Save</button>
 
@@ -77,7 +80,7 @@
 
 
 <!-- DELETE -->
-<form action="/vehiculos/delete/1" method="POST" class="inline-form">
+<form action="/vehiculos/delete/<%= vehiculo.id %>" method="POST" class="inline-form">
 
 <button type="submit" class="delete-btn">
 Delete
@@ -88,6 +91,9 @@ Delete
 </td>
 
 </tr>
+
+<% }) %>
+
 
 </tbody>
 
