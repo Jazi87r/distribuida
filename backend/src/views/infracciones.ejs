@@ -1,0 +1,98 @@
+<%- include("partials/header.ejs") %>
+
+<body>
+
+<h1>Infracciones</h1>
+
+<!-- CREATE INFRACTION -->
+<div class="create-container">
+<h2>Add Infraccion</h2>
+
+<form action="/infracciones/create" method="POST" class="create-form">
+
+<input type="number" name="identificacion" placeholder="identificacion" required>
+<input type="date" name="fecha" required>
+<input type="text" name="tipo" placeholder="Tipo" required>
+<input type="number" name="vehiculo_id" placeholder="Vehiculo ID" required>
+
+
+<button type="submit">Create</button>
+
+</form>
+</div>
+
+
+<!-- INFRACCIONES TABLE -->
+<table class="vehiculos-table">
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Identificación</th>
+<th>Fecha</th>
+<th>Tipo</th>
+<th>Vehiculo ID</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody>
+
+<!-- Example row (replace with template loop) -->
+
+<% infracciones.forEach(infraccion => { %>
+
+<tr>
+
+<td><%= infraccion.id %></td>
+<td><%= infraccion.identificacion %></td>
+<td><%= infraccion.fecha %></td>
+<td><%= infraccion.tipo %></td>
+<td><%= infraccion.vehiculo_id %></td>
+
+<td class="actions">
+
+<!-- UPDATE -->
+<form action="/infracciones/update/<%= infraccion.id %>" method="POST" class="inline-form">
+
+<button type="button" class="update-btn">Update</button>
+
+<div class="update-form hidden">
+
+<input type="number" name="identificacion" value="<%= infraccion.identificacion %>" required>
+<input type="date" name="fecha" value="<%= infraccion.fecha %>" required>
+<input type="text" name="tipo" value="<%= infraccion.tipo %>" required>
+<input type="number" name="vehiculo_id" value="<%= infraccion.vehiculo_id %>" required>
+
+<button type="submit">Save</button>
+
+</div>
+
+</form>
+
+
+<!-- DELETE -->
+<form action="/infracciones/delete/<%= infraccion.id %>" method="POST" class="inline-form">
+
+<button type="submit" class="delete-btn">
+Delete
+</button>
+
+</form>
+
+</td>
+
+</tr>
+
+<% }); %>
+
+</tbody>
+
+</table>
+
+
+<script src="/js/homepage.js"></script>
+
+</body>
+
+<%- include("partials/footer.ejs") %> 

@@ -38,49 +38,51 @@
 
 <tbody>
 
-<!-- Example row (replace with template loop) -->
+    <!-- Example row (replace with template loop) -->
+<% propietarios.forEach(propietario => { %>
 
-<tr>
+    <tr>
 
-<td>1</td>
-<td>persona</td>
-<td>102214</td>
-<td>jaziel</td>
-<td>cra69 123</td>
+        <td><%= propietario.id %></td>
+        <td><%= propietario.tipo %></td>
+        <td><%= propietario.identificacion %></td>
+        <td><%= propietario.nombre %></td>
+        <td><%= propietario.direccion %></td>
 
-<td class="actions">
+        <td class="actions">
 
-<!-- UPDATE -->
-<form action="/propietarios/update/1" method="POST" class="inline-form">
+            <!-- UPDATE -->
+            <form action="/propietarios/update/<%= propietario.id %>" method="POST" class="inline-form">
 
-<button type="button" class="update-btn">Update</button>
+                <button type="button" class="update-btn">Update</button>
 
-<div class="update-form hidden">
+                <div class="update-form hidden">
 
-<input type="text" name="tipo" value="persona" required>
-<input type="number" name="identificacion" value="102214" required>
-<input type="text" name="nombre" value="jaziel" required>
-<input type="text" name="direccion" value="cra69 123" required>
+                    <input type="text" name="tipo" value="<%= propietario.tipo %>" required>
+                    <input type="number" name="identificacion" value="<%= propietario.identificacion %>" required>
+                    <input type="text" name="nombre" value="<%= propietario.nombre %>" required>
+                    <input type="text" name="direccion" value="<%= propietario.direccion %>" required>
 
-<button type="submit">Save</button>
+                    <button type="submit">Save</button>
 
-</div>
+                </div>
 
-</form>
+            </form>
 
 
-<!-- DELETE -->
-<form action="/propietarios/delete/1" method="POST" class="inline-form">
+            <!-- DELETE -->
+            <form action="/propietarios/delete/<%= propietario.id %>" method="POST" class="inline-form">
+                <button type="submit" class="delete-btn">
+                    Delete
+                </button>
 
-<button type="submit" class="delete-btn">
-Delete
-</button>
+            </form>
 
-</form>
+        </td>
 
-</td>
+    </tr>
 
-</tr>
+<% }) %>
 
 </tbody>
 
