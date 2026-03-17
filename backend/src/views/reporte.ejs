@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Reporte de Infracciones - Sabaneta</title>
+
+<style>
+
+/* ===================================== */
+/* GENERAL */
+/* ===================================== */
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0;
+    background:#f4f6f9;
+}
+
+/* ===================================== */
+/* HEADER */
+/* ===================================== */
+
+.header{
+    background:#0d47a1;
+    color:white;
+    padding:20px 40px;
+}
+
+.header h1{
+    margin:0;
+}
+
+.header p{
+    margin:5px 0 0 0;
+    opacity:0.9;
+}
+
+/* ===================================== */
+/* CONTAINER */
+/* ===================================== */
+
+.container{
+    padding:40px;
+}
+
+/* ===================================== */
+/* REPORT CARDS */
+/* ===================================== */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    margin-bottom:40px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card h3{
+    margin-top:0;
+    color:#333;
+}
+
+.card .value{
+    font-size:28px;
+    font-weight:bold;
+    color:#0d47a1;
+}
+
+/* ===================================== */
+/* TABLE */
+/* ===================================== */
+
+.table-container{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#1976d2;
+    color:white;
+    padding:12px;
+    text-align:left;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #eee;
+}
+
+tr:hover{
+    background:#f3f7ff;
+}
+
+/* ===================================== */
+/* TOP USER */
+/* ===================================== */
+
+.top-user{
+    margin-top:40px;
+    background:#fff3cd;
+    border-left:6px solid #ffc107;
+    padding:25px;
+    border-radius:8px;
+}
+
+.top-user h2{
+    margin-top:0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>Secretaría de Movilidad</h1>
+    <p>Municipio de Sabaneta - Antioquia</p>
+</div>
+
+
+<div class="container">
+
+<h2>Reporte General de Infracciones</h2>
+
+
+<!-- REPORT CARDS -->
+
+<div class="cards">
+
+<div class="card">
+<h3>Mes con más infracciones</h3>
+<div class="value"><%= TopMonthData[0].mes %></div>
+<p><%= TopMonthData[0].total_infracciones %> infracciones registradas</p>
+</div>
+
+<div class="card">
+<h3>Tipo de vehículo con más infracciones</h3>
+<div class="value">Motocicletas</div>
+<p>63% del total de infracciones</p>
+</div>
+
+<div class="card">
+<h3>Total de usuarios con infracciones</h3>
+<div class="value">412</div>
+<p>Usuarios registrados en el sistema</p>
+</div>
+
+<div class="card">
+<h3>Total de infracciones registradas</h3>
+<div class="value"><%= TotalInfractionsData%></div>
+<p>Periodo Enero - Diciembre</p>
+</div>
+
+</div>
+
+
+
+<!-- TABLE -->
+
+<div class="table-container">
+
+<h2>Infracciones por Vehiculo</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Identificación</th>
+<th>placa</th>
+<th>Marca</th>
+<th>Número de Infracciones</th>
+</tr>
+</thead>
+
+<tbody>
+
+
+<% VehiculoData.forEach(vehiculo => { %>
+
+    <tr>
+        
+        <td><%= vehiculo.vehiculo_id %></td>
+        <td><%= vehiculo.placa %></td>
+        <td><%= vehiculo.marca %></td>
+        <td><%= vehiculo.total_infracciones %></td>
+
+
+    </tr>
+
+<%  }); %>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<!-- TABLE -->
+
+<div class="table-container">
+
+<h2>Infracciones por Usuario</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Identificación</th>
+<th>Nombre</th>
+<th>Número de Infracciones</th>
+</tr>
+</thead>
+
+<tbody>
+
+
+<% UsuarioData.forEach(usuario => { %>
+
+    <tr>
+        
+        <td><%= usuario.propietario_id %></td>
+        <td><%= usuario.nombre %></td>
+        <td><%= usuario.total_infracciones %></td>
+
+    </tr>
+
+<%  }); %>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<!-- TOP USER -->
+
+<div class="top-user">
+
+<h2>Usuario con Más Infracciones</h2>
+
+<p><strong><%= TopOwnerData[0].nombre %> </strong> con un total de <strong><%= TopOwnerData[0].total_infracciones %> infracciones</strong>.</p>
+
+</div>
+
+
+</div>
+
+</body>
+</html>

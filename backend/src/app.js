@@ -5,6 +5,7 @@ import authroutes from "./routes/authroutes.js";
 import vehiculosRoutes from "./routes/vehiculosRoutes.js";
 import propietariosRoutes from "./routes/propietariosRoutes.js";
 import infraccionesRoutes from "./routes/infraccionesRoutes.js";
+import reporteRoutes from "./routes/reporteRoutes.js";
 import supabase from './config/supabase.js';
 
 const app = express();
@@ -28,7 +29,7 @@ app.use("/", authroutes);
 app.use("/vehiculos", vehiculosRoutes);
 app.use("/propietarios", propietariosRoutes);
 app.use("/infracciones", infraccionesRoutes);
-app.use("/informe", informeRoutes);
+app.use("/reporte", reporteRoutes);
 
 app.get('/test-db', async (req, res) => {
   const { data, error } = await supabase.from('users').select('*').limit(3);
