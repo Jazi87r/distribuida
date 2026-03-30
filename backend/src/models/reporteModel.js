@@ -121,5 +121,23 @@ const getTopOwner = async () => {
     }
 };
 
-export { InfraccionesPorUsuario, InfracionesPorVehiculo, getTopMonth, getTotalInfractions, getTopOwner };
+const getTopVehicleType = async () => {
+    try {
+        const { data, error } = await supabase
+            .rpc("get_top_vehicle_type_by_infractions");
+
+        if (error) {
+            console.error("Error fetching top vehicle type:", error);
+            return { data: null, error };
+        }
+
+        return { data, error: null };
+
+    } catch (err) {
+        console.error("Unexpected error:", err);
+        return { data: null, error: err };
+    }
+};
+
+export { InfraccionesPorUsuario, InfracionesPorVehiculo, getTopMonth, getTotalInfractions, getTopOwner, getTopVehicleType };
 
