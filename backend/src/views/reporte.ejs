@@ -150,15 +150,10 @@ tr:hover{
 
 <div class="card">
 <h3>Tipo de vehículo con más infracciones</h3>
-<div class="value">Motocicletas</div>
-<p>63% del total de infracciones</p>
+<div class="value"><%= TopVehicleTypeData[0].tipo %> </div>
+<p>Total de infracciones: <%= TopVehicleTypeData[0].total_infracciones %></p>
 </div>
 
-<div class="card">
-<h3>Total de usuarios con infracciones</h3>
-<div class="value">412</div>
-<p>Usuarios registrados en el sistema</p>
-</div>
 
 <div class="card">
 <h3>Total de infracciones registradas</h3>

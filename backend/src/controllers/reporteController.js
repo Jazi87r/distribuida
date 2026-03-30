@@ -1,4 +1,4 @@
-import {InfraccionesPorUsuario, InfracionesPorVehiculo, getTopMonth, getTotalInfractions, getTopOwner} from "../models/reporteModel.js";
+import {InfraccionesPorUsuario, InfracionesPorVehiculo, getTopMonth, getTotalInfractions, getTopOwner, getTopVehicleType} from "../models/reporteModel.js";
 
 
 export const renderReporte = async (req, res) => {
@@ -36,14 +36,21 @@ export const renderReporte = async (req, res) => {
     }
 
 
+    const {data: TopVehicleTypeData, error: TopVehicleTypeError} = await getTopVehicleType();
+
+        if (TopVehicleTypeError) {
+        return res.status(500).json({ error: TopVehicleTypeError.message });
+    }
+
     console.log("Fetched reporte data usuario: CONTROLLER", UsuarioData);
    console.log("Fetched reporte data vehiculo: CONTROLLER", VehiculoData);
    console.log("Fetched reporte data top month: CONTROLLER", TopMonthData);
    console.log("Fetched reporte data total infractions: CONTROLLER", TotalInfractionsData);
    console.log("Fetched reporte data top owner: CONTROLLER", TopOwnerData);
+   console.log("Fetched reporte data top vehicle type: CONTROLLER", TopVehicleTypeData);
     console.log("Rendered propietarios page"); 
     
-    res.render("reporte.ejs", { UsuarioData: UsuarioData, VehiculoData: VehiculoData, TopMonthData: TopMonthData, TotalInfractionsData: TotalInfractionsData, TopOwnerData: TopOwnerData });
+    res.render("reporte.ejs", { UsuarioData: UsuarioData, VehiculoData: VehiculoData, TopMonthData: TopMonthData, TotalInfractionsData: TotalInfractionsData, TopOwnerData: TopOwnerData, TopVehicleTypeData: TopVehicleTypeData });
 
 
 
