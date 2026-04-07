@@ -8,7 +8,7 @@
 <div class="create-container">
 <h2>Add Infraccion</h2>
 
-<form action="/infracciones/create" method="POST" class="create-form">
+<form id="createForm" class="create-form"> <!-- CHANGE MADE OVER HERE -->
 
 <input type="number" name="identificacion" placeholder="identificacion" required>
 <input type="date" name="fecha" required>
@@ -53,7 +53,7 @@
 <td class="actions">
 
 <!-- UPDATE -->
-<form action="/infracciones/update/<%= infraccion.id %>" method="POST" class="inline-form">
+<form class="inline-form update-form-container" data-id="<%= infraccion.id %>">
 
 <button type="button" class="update-btn">Update</button>
 
@@ -72,13 +72,9 @@
 
 
 <!-- DELETE -->
-<form action="/infracciones/delete/<%= infraccion.id %>" method="POST" class="inline-form">
-
-<button type="submit" class="delete-btn">
+<button class="delete-btn" data-id="<%= infraccion.id %>">
 Delete
 </button>
-
-</form>
 
 </td>
 
@@ -92,6 +88,155 @@ Delete
 
 
 <script src="/js/homepage.js"></script>
+
+<script>
+// -------- CREATE INFRACCION --------
+document.getElementById("createForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const form = e.target;
+
+  const identificacion = parseInt(form.identificacion.value);
+  const fecha = form.fecha.value;
+  const tipo = form.tipo.value;
+  const vehiculo_id = parseInt(form.vehiculo_id.value);
+
+  const query = `
+    mutation CreateInfraccion($input: InfraccionInput!) {
+      createInfraccion(input: $input) {
+        id
+        tipo
+      }
+    }
+  `;
+
+  const variables = {
+    input: {
+      identificacion,
+      fecha,
+      tipo,
+      vehiculo_id
+    }
+  };
+
+  try {
+    const res = await fetch("/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ query, variables })
+    });
+
+    const result = await res.json();
+
+    if (result.errors) {
+      console.error("GraphQL errors:", result.errors);
+      return;
+    }
+
+    window.location.reload();
+
+  } catch (err) {
+    console.error("Fetch error:", err);
+  }
+});
+
+
+// -------- DELETE INFRACCION --------
+document.querySelectorAll(".delete-btn").forEach(button => {
+  button.addEventListener("click", async () => {
+
+    const id = button.getAttribute("data-id");
+
+    const query = `
+      mutation($id: ID!) {
+        deleteInfraccion(id: $id)
+      }
+    `;
+
+    const variables = { id };
+
+    try {
+      const res = await fetch("/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ query, variables })
+      });
+
+      const result = await res.json();
+
+      if (result.errors) {
+        console.error("GraphQL errors:", result.errors);
+        return;
+      }
+
+      window.location.reload();
+
+    } catch (err) {
+      console.error("Fetch error:", err);
+    }
+  });
+});
+
+
+// -------- UPDATE INFRACCION --------
+document.querySelectorAll(".update-form-container").forEach(form => {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const id = form.getAttribute("data-id");
+
+    const identificacion = parseInt(form.identificacion.value);
+    const fecha = form.fecha.value;
+    const tipo = form.tipo.value;
+    const vehiculo_id = parseInt(form.vehiculo_id.value);
+
+    const query = `
+      mutation($id: ID!, $input: InfraccionInput!) {
+        updateInfraccion(id: $id, input: $input) {
+          id
+          tipo
+        }
+      }
+    `;
+
+    const variables = {
+      id,
+      input: {
+        identificacion,
+        fecha,
+        tipo,
+        vehiculo_id
+      }
+    };
+
+    try {
+      const res = await fetch("/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ query, variables })
+      });
+
+      const result = await res.json();
+
+      if (result.errors) {
+        console.error("GraphQL errors:", result.errors);
+        return;
+      }
+
+      window.location.reload();
+
+    } catch (err) {
+      console.error("Fetch error:", err);
+    }
+  });
+});
+</script>
 
 </body>
 
