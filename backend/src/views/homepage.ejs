@@ -8,7 +8,7 @@
 <div class="create-container">
 <h2>Add Vehicle</h2>
 
-<form action="/vehiculos/create" method="POST" class="create-form">
+<form id="createForm" class="create-form"> <!-- CHANGE MADE OVER HERE -->
 
 <input type="text" name="placa" placeholder="Placa" required>
 <input type="text" name="marca" placeholder="Marca" required>
@@ -59,7 +59,7 @@
 <td class="actions">
 
 <!-- UPDATE -->
-<form action="/vehiculos/update/<%= vehiculo.id %>" method="POST" class="inline-form">
+<form class="inline-form update-form-container" data-id="<%= vehiculo.id %>">
 
 <button type="button" class="update-btn">Update</button>
 
@@ -80,13 +80,10 @@
 
 
 <!-- DELETE -->
-<form action="/vehiculos/delete/<%= vehiculo.id %>" method="POST" class="inline-form">
 
-<button type="submit" class="delete-btn">
+<button class="delete-btn" data-id="<%= vehiculo.id %>">
 Delete
 </button>
-
-</form>
 
 </td>
 
@@ -101,6 +98,169 @@ Delete
 
 
 <script src="/js/homepage.js"></script>
+
+
+<script>
+document.getElementById("createForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const form = e.target;
+
+  const placa = form.placa.value;
+  const marca = form.marca.value;
+  const matricula = parseInt(form.matricula.value);
+  const fecha_matricula = form.fecha_matricula.value;
+  const tipo = form.tipo.value;
+  const propietario_id = parseInt(form.propietario_id.value);
+
+  const query = `
+    mutation CreateVehiculo($input: VehiculoInput!) {
+      createVehiculo(input: $input) {
+        id
+        placa
+      }
+    }
+  `;
+
+  const variables = {
+    input: {
+      placa,
+      marca,
+      matricula,
+      fecha_matricula,
+      tipo,
+      propietario_id
+    }
+  };
+
+  try {
+    const res = await fetch("/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ query, variables })
+    });
+
+    const result = await res.json();
+
+    if (result.errors) {
+      console.error("GraphQL errors:", result.errors);
+      return;
+    }
+
+    console.log("GraphQL response:", result);
+
+    window.location.reload();
+
+  } catch (err) {
+    console.error("Fetch error:", err);
+  }
+});
+
+// -------- DELETE VEHICULO --------
+document.querySelectorAll(".delete-btn").forEach(button => {
+  button.addEventListener("click", async () => {
+
+    const id = button.getAttribute("data-id");
+
+    const query = `
+      mutation($id: ID!) {
+        deleteVehiculo(id: $id)
+      }
+    `;
+
+    const variables = { id };
+
+    try {
+      const res = await fetch("/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ query, variables })
+      });
+
+      const result = await res.json();
+
+      if (result.errors) {
+        console.error("GraphQL errors:", result.errors);
+        return;
+      }
+
+      console.log("Vehiculo eliminado:", result);
+
+      window.location.reload();
+
+    } catch (err) {
+      console.error("Fetch error:", err);
+    }
+  });
+});
+
+
+// -------- UPDATE VEHICULO --------
+document.querySelectorAll(".update-form-container").forEach(form => {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const id = form.getAttribute("data-id");
+
+    const placa = form.placa.value;
+    const marca = form.marca.value;
+    const matricula = parseInt(form.matricula.value);
+    const fecha_matricula = form.fecha_matricula.value;
+    const tipo = form.tipo.value;
+    const propietario_id = parseInt(form.propietario_id.value);
+
+    const query = `
+      mutation($id: ID!, $input: VehiculoInput!) {
+        updateVehiculo(id: $id, input: $input) {
+          id
+          placa
+        }
+      }
+    `;
+
+    const variables = {
+      id,
+      input: {
+        placa,
+        marca,
+        matricula,
+        fecha_matricula,
+        tipo,
+        propietario_id
+      }
+    };
+
+    try {
+      const res = await fetch("/graphql", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ query, variables })
+      });
+
+      const result = await res.json();
+
+      if (result.errors) {
+        console.error("GraphQL errors:", result.errors);
+        return;
+      }
+
+      console.log("Vehiculo actualizado:", result);
+
+      window.location.reload();
+
+    } catch (err) {
+      console.error("Fetch error:", err);
+    }
+  });
+});
+
+</script>
 
 </body>
 
